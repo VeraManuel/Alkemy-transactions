@@ -1,5 +1,4 @@
-const db = require("../models");
-const User = db.user;
+const { User } = require("../models");
 
 checkDuplicateEmail = (req, res, next) => {
   User.findOne({
@@ -8,12 +7,17 @@ checkDuplicateEmail = (req, res, next) => {
     },
   }).then((user) => {
     if (user) {
-      res.status(400).send({ message: "Failed! Email already in use!" });
+      res.status(400).send({
+        message: "Failed! That email is already in use!",
+      });
       return;
     }
-
     next();
   });
 };
 
-module.exports = checkDuplicateEmail;
+const verifySignUp = {
+  checkDuplicateEmail: checkDuplicateEmail,
+};
+
+module.exports = verifySignUp;
