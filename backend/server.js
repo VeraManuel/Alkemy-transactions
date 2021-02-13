@@ -6,6 +6,7 @@ const app = express();
 
 // Loading routes
 const user_routes = require("./api/routes/user");
+const operation_routes = require("./api/routes/operation");
 
 // Middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -15,6 +16,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use("/api", user_routes);
+app.use("/api", operation_routes);
 
 // Server up
 app.listen({ port: 8080 }, async () => {
