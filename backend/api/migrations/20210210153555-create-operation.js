@@ -28,6 +28,10 @@ module.exports = {
         type: DataTypes.DOUBLE,
         allowNull: false,
       },
+      dateOperation: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
       createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
