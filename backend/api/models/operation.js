@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate({ User, Category }) {
       // define association here
       this.belongsTo(User, { foreignKey: "userId" });
-      this.belongsTo(Category, { foreignKey: "categoyId" });
+      this.belongsTo(Category, { foreignKey: "categoryId" });
     }
   }
   Operation.init(
@@ -27,10 +27,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DOUBLE,
         allowNull: false,
       },
+      dateOperation: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
     },
     {
       sequelize,
-      tableName: "opetarions",
+      tableName: "operations",
       modelName: "Operation",
     }
   );
