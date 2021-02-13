@@ -17,21 +17,33 @@ module.exports = {
       [
         {
           name: "Supermercado",
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           name: "Farmacia",
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           name: "Restaurants",
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           name: "Tarjeta de Credito",
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           name: "Alquiler",
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
         {
           name: "Otros",
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
       ],
       {}
