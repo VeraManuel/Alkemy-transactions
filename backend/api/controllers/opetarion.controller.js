@@ -2,7 +2,8 @@ const { Operation, User, Category } = require("../models");
 const { getPagination, getPaginationData } = require("../helpers/pagination");
 
 async function create(req, res) {
-  const { userId, categoryId, concept, type, amount, dateOperation } = req.body;
+  const { categoryId, concept, type, amount, dateOperation } = req.body;
+  const userId = req.userId;
 
   try {
     const user = await User.findOne({ where: { id: userId } });
@@ -10,7 +11,7 @@ async function create(req, res) {
     const category = await Category.findOne({ where: { id: categoryId } });
 
     const operation = await Operation.create({
-      userId: user.id,
+      userId: req.userId,
       categoryId: category.id,
       concept,
       type,
@@ -25,12 +26,12 @@ async function create(req, res) {
 
 async function getOperation(req, res) {
   const { page, size } = req.query;
-  const userId = req.body;
+  const userId = req.userId;
 
   const { limit, offset } = getPagination(page, size);
 
   await Operation.findAndCountAll({
-    where: userId,
+    where: { userId },
     limit,
     offset,
   })
@@ -47,24 +48,29 @@ async function getOperation(req, res) {
 }
 
 async function getTotals(req, res) {
-  const { userId } = req.body;
+  const userId = req.userId;
   const totalSpends = {
     income: 0,
     outcome: 0,
   };
 
-  const allOperations = await Operation.findAll({ where: { userId } });
+  try {
+    const allOperations = await Operation.findAll({ where: { userId } });
 
-  allOperations.forEach((operation) => {
-    totalSpends[operation.type] += parseInt(operation.amount, 10);
-  });
+    allOperations.forEach((operation) => {
+      totalSpends[operation.type] += parseInt(operation.amount, 10);
+    });
 
-  return res.status(200).json({
-    money: {
-      ...totalSpends,
-      rest: totalSpends.income - totalSpends.outcome,
-    },
-  });
+    return res.status(200).json({
+      money: {
+        ...totalSpends,
+        rest: totalSpends.income - totalSpends.outcome,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({ message: error });
+  }
 }
 
 async function updateOperation(req, res) {

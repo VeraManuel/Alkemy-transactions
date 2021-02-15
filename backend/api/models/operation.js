@@ -18,18 +18,22 @@ module.exports = (sequelize, DataTypes) => {
       concept: {
         type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: null,
       },
       type: {
         type: DataTypes.STRING,
         allowNull: false,
+        defaultValue: null,
       },
       amount: {
         type: DataTypes.DOUBLE,
         allowNull: false,
+        defaultValue: null,
       },
       dateOperation: {
         type: DataTypes.DATE,
         allowNull: false,
+        defaultValue: null,
       },
     },
     {
