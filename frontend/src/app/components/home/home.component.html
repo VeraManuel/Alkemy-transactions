@@ -1,5 +1,6 @@
 <div class="container">
   <header class="jumbotron">
-    <h2>Money available: ${{ currentBalance }}</h2>
+    <h2 *ngIf="isLoggedIn">Money available: ${{ currentBalance }}</h2>
+    <h2 *ngIf="!isLoggedIn">Welcome to the Transaction App</h2>
   </header>
 </div>

@@ -10,6 +10,7 @@ import { TokenStorageService } from '../../_services/token-storage.service';
 export class HomeComponent implements OnInit {
 
   public token;
+  public isLoggedIn = false;
   public page = 1;
   public operations;
   public currentBalance;
@@ -25,6 +26,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void { 
     this.getOperationsTotal(this.user);
+    this.isLoggedIn = !!this.tokenStorage.getToken();
 
   }
 
