@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { OperationService } from '../_services/operation.service';
-import { TokenStorageService } from '../_services/token-storage.service';
+import { OperationService } from '../../_services/operation.service';
+import { TokenStorageService } from '../../_services/token-storage.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

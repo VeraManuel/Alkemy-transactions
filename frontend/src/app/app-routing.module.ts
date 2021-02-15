@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { RegisterComponent } from './register/register.component';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent} from './home/home.component';
-import { ProfileComponent } from './profile/profile.component';
-import { AddTransactionComponent } from './add-transaction/add-transaction.component';
-import { TransactionDetailComponent } from './transaction-detail/transaction-detail.component';
-import { TransactionComponent } from './transaction/transaction.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+import { HomeComponent} from './components/home/home.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { AddTransactionComponent } from './components/add-transaction/add-transaction.component';
+import { TransactionDetailComponent } from './components/transaction-detail/transaction-detail.component';
+import { TransactionComponent } from './components/transaction/transaction.component';
 
 
 const routes: Routes = [
