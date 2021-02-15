@@ -1,1 +1,66 @@
-<p>login works!</p>
+<div class="col-md-12">
+  <div class="card card-container">
+    <form
+      *ngIf="!isLoggedIn"
+      name="form"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      novalidate
+    >
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          name="email"
+          [(ngModel)]="form.email"
+          required
+          #email="ngModel"
+        />
+        <div
+          class="alert-danger"
+          role="alert"
+          *ngIf="f.submitted && email.invalid"
+        >
+          <div *ngIf="email.errors.required">Email is required</div>
+          <div *ngIf="email.errors?.email">
+            Email must be a valid email address
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          [(ngModel)]="form.password"
+          required
+          minlength="6"
+          #password="ngModel"
+        />
+        <div
+          class="alert-danger"
+          role="alert"
+          *ngIf="f.submitted && password.invalid"
+        >
+          <div *ngIf="password.errors.required">Password is required</div>
+          <div *ngIf="password.errors?.minlength">
+            Password must be at least 6 characters
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary btn-block">Login</button>
+      </div>
+
+      <div class="alert alert-warning" *ngIf="f.submitted && isLoginFailed">
+        Login failed: {{ errorMessage }}<br />
+        {{ errorMessage }}
+      </div>
+    </form>
+
+    <div class="alert alert-success" *ngIf="isLoggedIn">Welcome!!</div>
+  </div>
+</div>

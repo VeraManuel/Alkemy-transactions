@@ -1,1 +1,26 @@
-<p>profile works!</p>
+<div class="container" *ngIf="currentUser; else loggedOut">
+  <header class="jumbotron">
+    <h3>
+      Profile:
+      <strong
+        >{{ currentUser.name | titlecase }}
+        {{ currentUser.lastname | titlecase }}</strong
+      >
+    </h3>
+  </header>
+  <p>
+    <strong>Name:</strong>
+    {{ currentUser.name | titlecase }}
+  </p>
+  <p>
+    <strong>Lastname:</strong>
+    {{ currentUser.lastname | titlecase }}
+  </p>
+
+  <p>
+    <strong>Email:</strong>
+    {{ currentUser.email }}
+  </p>
+</div>
+
+<ng-template #loggedOut> Please login. </ng-template>

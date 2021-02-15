@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { OperationService } from '../_services/operation.service';
+import { TokenStorageService } from '../_services/token-storage.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +10,61 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  public token;
+  public operations;
+  public currentBalance;
+  public status: string;
+  @Input() user: string;
 
-  ngOnInit(): void {
+  constructor (
+    private operataionService : OperationService,
+    private tokenStorage: TokenStorageService,
+    ) {
+      this.token = this.tokenStorage.getToken();
+    }
+
+  ngOnInit(): void { 
+    this.getOperationsTotal(this.user);
+
+  }
+
+  getOperations(user) {
+    this.operataionService.getOperations(this.token).subscribe(
+      response => {
+        console.log(response);
+        
+        if (response.operations) {
+          this.operations = response.operations;
+          console.log(this.operations);
+        }
+      },
+      error => {
+        console.log(error);
+        var errorMessage = <any>error;
+        console.log(errorMessage);
+        if(errorMessage != null){
+          this.status = 'error';
+        }
+        
+      }
+    )
+  }
+
+  getOperationsTotal(user) {
+    this.operataionService.getOperationsTotal(this.token).subscribe(
+      response => {
+        this.currentBalance = response.money.rest;
+      },
+      error => {
+        console.log(error);
+        var errorMessage = <any>error;
+        console.log(errorMessage);
+        if(errorMessage != null){
+          this.status = 'error';
+        }
+        
+      }
+    )
   }
 
 }

@@ -13,6 +13,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { TransactionComponent } from './transaction/transaction.component';
 
 import { AuthInterceptorProviders } from './_helpers/auth.interceptor';
+import { AddTransactionComponent } from './add-transaction/add-transaction.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AuthInterceptorProviders } from './_helpers/auth.interceptor';
     RegisterComponent,
     HomeComponent,
     ProfileComponent,
-    TransactionComponent
+    TransactionComponent,
+    AddTransactionComponent
   ],
   imports: [
     BrowserModule,
