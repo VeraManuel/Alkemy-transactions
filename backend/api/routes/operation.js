@@ -5,7 +5,12 @@ const { authJwt } = require("../middleware");
 const api = express.Router();
 
 api.post("/operation", authJwt.verifyToken, operationController.create);
-api.get("/operation", authJwt.verifyToken, operationController.getOperation);
+api.get("/operation", authJwt.verifyToken, operationController.getOperations);
+api.get(
+  "/operation/:id",
+  authJwt.verifyToken,
+  operationController.getOperation
+);
 api.get("/operation-type", authJwt.verifyToken, operationController.getByType);
 api.get("/operation-total", authJwt.verifyToken, operationController.getTotals);
 api.put(

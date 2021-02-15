@@ -24,7 +24,7 @@ async function create(req, res) {
   }
 }
 
-async function getOperation(req, res) {
+async function getOperations(req, res) {
   const { page, size } = req.query;
   const userId = req.userId;
 
@@ -94,6 +94,20 @@ async function updateOperation(req, res) {
   }
 }
 
+async function getOperation(req, res) {
+  const id = req.params.id;
+  const { categoryId, concept, amount, dateOperation } = req.body;
+
+  try {
+    const operation = await Operation.findOne({ where: { id } });
+
+    return res.json(operation);
+  } catch (error) {
+    console.log(error);
+    return res.status(400).send({ message: error });
+  }
+}
+
 async function deleteOperation(req, res) {
   const id = req.params.id;
   try {
@@ -123,9 +137,10 @@ async function getByType(req, res) {
 
 module.exports = {
   create,
-  getOperation,
+  getOperations,
   updateOperation,
   deleteOperation,
   getByType,
   getTotals,
+  getOperation,
 };
