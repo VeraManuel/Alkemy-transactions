@@ -2,10 +2,27 @@
   <div class="col-md-6">
     <h3>Transaction List</h3>
     <h4>Money available: ${{ currentBalance }}</h4>
+    <div class="col-md-12">
+      <pagination-controls
+        previousLabel="Prev"
+        nextLabel="Next"
+        responsive="true"
+        (pageChange)="handlePageChange($event)"
+      ></pagination-controls>
+    </div>
     <ul class="list-group">
       <li
         class="list-group-item"
-        *ngFor="let transaction of operationList; let i = index"
+        *ngFor="
+          let transaction of operationList
+            | paginate
+              : {
+                  itemsPerPage: pageSize,
+                  currentPage: page,
+                  totalItems: count
+                };
+          let i = index
+        "
         [class.active]="i == currentIndex"
         (click)="setActiveOperation(transaction, i)"
       >
@@ -13,6 +30,7 @@
       </li>
     </ul>
   </div>
+
   <div class="col-md-6">
     <div *ngIf="currentOperation">
       <h4>Operation</h4>

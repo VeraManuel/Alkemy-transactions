@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule} from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -32,6 +33,7 @@ import { TransactionDetailComponent } from './transaction-detail/transaction-det
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    NgxPaginationModule,
   ],
   providers: [AuthInterceptorProviders, AppRoutingModule],
   bootstrap: [AppComponent]

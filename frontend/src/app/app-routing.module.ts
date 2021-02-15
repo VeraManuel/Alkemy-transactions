@@ -17,6 +17,7 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent},
   {path: 'add', component: AddTransactionComponent},
   {path: 'transactions', component: TransactionComponent},
+  {path: 'transactions?page=1', component: TransactionComponent},
   {path: 'transaction/:id', component: TransactionDetailComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];

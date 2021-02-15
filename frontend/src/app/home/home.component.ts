@@ -10,6 +10,7 @@ import { TokenStorageService } from '../_services/token-storage.service';
 export class HomeComponent implements OnInit {
 
   public token;
+  public page = 1;
   public operations;
   public currentBalance;
   public status: string;
@@ -28,7 +29,7 @@ export class HomeComponent implements OnInit {
   }
 
   getOperations(user) {
-    this.operataionService.getOperations(this.token).subscribe(
+    this.operataionService.getOperations(this.token, this.page).subscribe(
       response => {
         console.log(response);
         

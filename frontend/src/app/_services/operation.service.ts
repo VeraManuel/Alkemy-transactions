@@ -14,18 +14,18 @@ export class OperationService {
 
   constructor(private http: HttpClient,) {   }
 
-  getOperations(token): Observable<any> {
+  getOperations(token, params): Observable<any> {
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                   .set('Authorization', token);
 
-    return this.http.get(API_URL + '/operation', {headers:headers})
+    return this.http.get(API_URL + '/operation', {headers:headers , params})
   }
 
   getOperationsTotal(token): Observable<any> {
     let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                   .set('Authorization', token);
 
-    return this.http.get(API_URL + '/operation-total', {headers:headers})
+    return this.http.get(API_URL + '/operation-total',  {headers:headers})
   }
 
     create(token,data): Observable<any> {

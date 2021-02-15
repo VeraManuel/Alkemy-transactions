@@ -11,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class TransactionDetailComponent implements OnInit {
 
   public token;
+  public page = 1;
   public operations;
   public currentBalance;
   public currentOperation = null;
@@ -57,7 +58,7 @@ export class TransactionDetailComponent implements OnInit {
   }
 
   getOperations(user) {
-    this.operataionService.getOperations(this.token).subscribe(
+    this.operataionService.getOperations(this.token, this.page).subscribe(
       response => {
         console.log(response);
         

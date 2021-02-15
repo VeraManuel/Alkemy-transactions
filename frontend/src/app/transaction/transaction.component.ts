@@ -10,6 +10,10 @@ import { TokenStorageService } from '../_services/token-storage.service';
 export class TransactionComponent implements OnInit {
 
   public token;
+  public page = 1;
+  public count = 0;
+  public pageSize = 10;
+  public title ='';
   public operationList: any;
   public currentBalance;
   public currentOperation = null;
@@ -33,13 +37,32 @@ export class TransactionComponent implements OnInit {
     this.getOperationsTotal(this.user)
   }
 
+  getRequestParams(page, pageSize): any {
+    let params = {};
+
+    if (page) {
+      params[`page`] = page -1;
+    }
+
+    if (pageSize) {
+      params[`size`] = pageSize;
+    }
+
+    return params;
+  }
+
   retrieveOperations(): void {
-    this.operataionService.getOperations(this.token)
+
+    const params = this.getRequestParams(this.page, this.pageSize);
+
+    this.operataionService.getOperations(this.token,params)
       .subscribe(
-        data => {
-          const { operations } = data
+        data => {;
+          
+          const { operations, totalOperations } = data
           this.operationList = operations;
-          console.log(operations);
+          this.count = totalOperations;
+          console.log(this.count);
           
         },
         error => {
@@ -73,6 +96,13 @@ export class TransactionComponent implements OnInit {
         
       }
     )
+  }
+
+  handlePageChange(event){
+    console.log(event);
+    
+    this.page = event;
+    this.retrieveOperations();
   }
 
 }
