@@ -17,6 +17,7 @@ export class AddTransactionComponent implements OnInit {
     dateOperation: ''
   };
   public submitted = false;
+  public userId;
   public token;
   public status: string;
   @Input() user: string;
@@ -24,14 +25,17 @@ export class AddTransactionComponent implements OnInit {
   constructor(
     private operataionService : OperationService,
     private tokenStorage: TokenStorageService,
-  ) { this.token = this.tokenStorage.getToken(); }
+  ) { 
+  this.token = this.tokenStorage.getToken(); 
+  this.userId = this.tokenStorage.getUser();
+}
 
   ngOnInit(): void {
   }
 
   saveOperation(user): void {
     const data = {
-      userId: this.user,
+      userId: this.userId,
       categoryId: this.operation.categoryId,
       concept: this.operation.concept,
       type: this.operation.type,
@@ -56,7 +60,7 @@ export class AddTransactionComponent implements OnInit {
   newOperation(user): void {
     this.submitted = false;
     this.operation = {
-      userId: this.user,
+      userId: this.userId,
       categoryId:'',
       concept: '',
       type: '',

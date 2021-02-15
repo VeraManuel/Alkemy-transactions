@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { OperationService } from '../_services/operation.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 
@@ -10,41 +10,52 @@ import { TokenStorageService } from '../_services/token-storage.service';
 export class TransactionComponent implements OnInit {
 
   public token;
-  public operations;
+  public operationList: any;
   public currentBalance;
+  public currentOperation = null;
+  public userId;
   public status: string;
+  public currentIndex = -1;
   @Input() user: string;
+
 
   constructor(
     private operataionService : OperationService,
     private tokenStorage: TokenStorageService,
-  ) { this.token = this.tokenStorage.getToken(); }
+  ) 
+  { 
+    this.token = this.tokenStorage.getToken(); 
+    this.userId = this.tokenStorage.getUser();
+}
 
   ngOnInit(): void {
-    this.getOperationsTotal(this.user);
-    this.getOperations(this.user);
+    this.retrieveOperations();
+    this.getOperationsTotal(this.user)
   }
 
-  getOperations(user) {
-    this.operataionService.getOperations(this.token).subscribe(
-      response => {
-        console.log(response);
-        
-        if (response.operations) {
-          this.operations = response.operations;
-          console.log(this.operations);
-        }
-      },
-      error => {
-        console.log(error);
-        var errorMessage = <any>error;
-        console.log(errorMessage);
-        if(errorMessage != null){
-          this.status = 'error';
-        }
-        
-      }
-    )
+  retrieveOperations(): void {
+    this.operataionService.getOperations(this.token)
+      .subscribe(
+        data => {
+          const { operations } = data
+          this.operationList = operations;
+          console.log(operations);
+          
+        },
+        error => {
+          console.log(error);
+    });
+  }
+
+  refreshList(): void {
+    this.retrieveOperations();
+    this.currentOperation = null;
+    this.currentIndex = -1;
+  }
+
+  setActiveOperation(operation, index): void {
+    this.currentOperation = operation;
+    this.currentIndex = index;
   }
 
   getOperationsTotal(user) {
@@ -65,3 +76,5 @@ export class TransactionComponent implements OnInit {
   }
 
 }
+
+

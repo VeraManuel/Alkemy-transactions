@@ -1,0 +1,72 @@
+<div style="width: 400px; margin: auto">
+  <div *ngIf="currentOperation" class="edit-form">
+    <h4>Operation</h4>
+    <form>
+      <div class="form-group">
+        <label for="categoryId">Category</label>
+        <select
+          class="form-control"
+          id="type"
+          required
+          [(ngModel)]="currentOperation.categoryId"
+          name="categoryId"
+        >
+          <option value="1">Supermercado</option>
+          <option value="2">Farmarcia</option>
+          <option value="3">Restaurants</option>
+          <option value="4">Tarjeta de Credito</option>
+          <option value="5">Alquiler</option>
+          <option value="6">Otros</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="concept">Concept</label>
+        <input
+          type="text"
+          class="form-control"
+          id="concept"
+          [(ngModel)]="currentOperation.concept"
+          name="concept"
+        />
+      </div>
+      <div class="form-group">
+        <label for="amount">Amount</label>
+        <input
+          type="text"
+          class="form-control"
+          id="date"
+          [(ngModel)]="currentOperation.amount"
+          name="amount"
+        />
+      </div>
+      <div class="form-group">
+        <label for="dateOperation">Date</label>
+        <input
+          type="date"
+          class="form-control"
+          id="date"
+          [(ngModel)]="currentOperation.dateOperation"
+          name="date"
+        />
+      </div>
+    </form>
+
+    <button class="badge badge-danger mr-2" (click)="deleteOperation()">
+      Delete
+    </button>
+
+    <button
+      type="submit"
+      class="badge badge-success"
+      (click)="updateOperation()"
+    >
+      Update
+    </button>
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentOperation">
+    <br />
+    <p>Cannot access this Operation...</p>
+  </div>
+</div>

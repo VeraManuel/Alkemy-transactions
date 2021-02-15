@@ -1,1 +1,44 @@
-<p>transaction works!</p>
+<div class="list row">
+  <div class="col-md-6">
+    <h3>Transaction List</h3>
+    <h4>Money available: ${{ currentBalance }}</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let transaction of operationList; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveOperation(transaction, i)"
+      >
+        {{ transaction.concept }} - {{ transaction.amount }}
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="currentOperation">
+      <h4>Operation</h4>
+      <div>
+        <label><strong>concept:</strong></label> {{ currentOperation.concept }}
+      </div>
+      <div>
+        <label><strong>Amout:</strong></label>
+        {{ currentOperation.amount }}
+      </div>
+      <div>
+        <label><strong>Date:</strong></label>
+        {{ currentOperation.dateOperation }}
+      </div>
+
+      <a
+        class="badge badge-warning"
+        routerLink="/transaction/{{ currentOperation.id }}"
+      >
+        Edit
+      </a>
+    </div>
+
+    <div *ngIf="!currentOperation">
+      <br />
+      <p>Please click on a Transaction...</p>
+    </div>
+  </div>
+</div>

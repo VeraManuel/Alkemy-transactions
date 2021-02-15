@@ -29,6 +29,8 @@ export class OperationService {
   }
 
     create(token,data): Observable<any> {
+      console.log(data);
+      
       let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                     .set('Authorization', token);
 
@@ -36,18 +38,24 @@ export class OperationService {
   }
 
     update(token,id, data): Observable<any> {
-      let params = JSON.stringify(data) 
       let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                     .set('Authorization', token);
 
-      return this.http.put(`${API_URL}'/operation'/${id}`, params, {headers:headers})
+      return this.http.put(API_URL + '/operation/' + id, data, {headers:headers})
   }
 
     delete(token,id): Observable<any> {
       let headers = new HttpHeaders().set('Content-Type', 'application/json')
                                     .set('Authorization', token);
 
-      return this.http.delete(`${API_URL}'/operation'/${id}`, {headers:headers})
+      return this.http.delete(API_URL + '/operation/' + id, {headers:headers})
+  }
+
+      getOperation(token,id): Observable<any> {
+      let headers = new HttpHeaders().set('Content-Type', 'application/json')
+                                    .set('Authorization', token);
+
+      return this.http.get(API_URL + '/operation/' + id, {headers:headers})
   }
 
 }
